@@ -1,0 +1,23 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  override:
+    - docker pull aussielunix/fpm-cook:ubuntu_14.04
+    - gem install package_cloud
+
+test:
+  override:
+    - docker run -v $PWD:/data/ -i -t aussielunix/fpm-cook:ubuntu_14.04
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - package_cloud push aussielunix/tools/ubuntu/14.04 /home/ubuntu/BitchX-packages/pkg/*_amd64.deb
+
+general:
+  artifacts:
+    - /home/ubuntu/BitchX-packages/pkg/
+
