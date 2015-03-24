@@ -17,9 +17,11 @@ class BitchX < FPM::Cookery::Recipe
 
   def build
     configure(
-      :with-ssl         => true,
-      :with-plugins     => true,
-      :enable-ipv6      => true,
+      {
+        :with-ssl         => true,
+        :with-plugins     => true,
+        :enable-ipv6      => true
+      }
     )
     make
   end
